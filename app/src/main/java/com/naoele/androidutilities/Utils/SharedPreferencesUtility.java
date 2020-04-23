@@ -176,11 +176,33 @@ public class SharedPreferencesUtility {
     }
 
     /**
+     * int型の値を設定するか削除する
+     */
+    private static void setIntegerOrRemove(String key, Integer value) {
+        if (value == null) {
+            remove(key);
+        } else {
+            setInt(key, value);
+        }
+    }
+
+    /**
      * long型の値を設定する
      */
     private static void setLong(String key, long value) {
         SharedPreferences.Editor edit = getSharedPreferences().edit();
         edit.putLong(key, value).apply();
+    }
+
+    /**
+     * long型の値を設定するか削除する
+     */
+    private static void setLongOrRemove(String key, Long value) {
+        if (value == null) {
+            remove(key);
+        } else {
+            setLong(key, value);
+        }
     }
 
     /**
@@ -192,11 +214,33 @@ public class SharedPreferencesUtility {
     }
 
     /**
-     * Double型の値を設定する
+     * float型の値を設定するか削除する
      */
-    private static void setDouble(String key, Double value) {
+    private static void setFloatOrRemove(String key, Float value) {
+        if (value == null) {
+            remove(key);
+        } else {
+            setFloat(key, value);
+        }
+    }
+
+    /**
+     * double型の値を設定する
+     */
+    private static void setDouble(String key, double value) {
         SharedPreferences.Editor edit = getSharedPreferences().edit();
-        edit.putFloat(key, value.floatValue()).apply();
+        edit.putLong(key, Double.doubleToRawLongBits(value)).apply();
+    }
+
+    /**
+     * Double型の値を設定するか削除する
+     */
+    private static void setDoubleOrRemove(String key, Double value) {
+        if (value == null) {
+            remove(key);
+        } else {
+            setDouble(key, value);
+        }
     }
 
     /**
@@ -208,6 +252,17 @@ public class SharedPreferencesUtility {
     }
 
     /**
+     * boolean型の値を設定するか削除する
+     */
+    private static void setBooleanOrRemove(String key, Boolean value) {
+        if (value == null) {
+            remove(key);
+        } else {
+            setBoolean(key, value);
+        }
+    }
+
+    /**
      * String型の値を設定する
      */
     private static void setString(String key, String value) {
@@ -216,11 +271,33 @@ public class SharedPreferencesUtility {
     }
 
     /**
+     * String型の値を設定するか削除する
+     */
+    private static void setStringOrRemove(String key, String value) {
+        if (value == null || value.isEmpty()) {
+            remove(key);
+        } else {
+            setString(key, value);
+        }
+    }
+
+    /**
      * Set<String>型の値を設定する
      */
     private static void setStringSet(String key, Set<String> value) {
         SharedPreferences.Editor edit = getSharedPreferences().edit();
         edit.putStringSet(key, value).apply();
+    }
+
+    /**
+     * Set<String>型の値を設定するか削除する
+     */
+    private static void setStringSetOrRemove(String key, Set<String> value) {
+        if (value == null || value.isEmpty()) {
+            remove(key);
+        } else {
+            setStringSet(key, value);
+        }
     }
 
     /**
