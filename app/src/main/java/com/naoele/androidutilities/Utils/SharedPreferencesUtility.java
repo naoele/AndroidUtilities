@@ -3,6 +3,7 @@ package com.naoele.androidutilities.Utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -73,7 +74,7 @@ public class SharedPreferencesUtility {
     }
 
     private static float getFloat(String key) {
-        return getFloat(key, 0L);
+        return getFloat(key, 0f);
     }
 
     /**
@@ -89,21 +90,22 @@ public class SharedPreferencesUtility {
     /**
      * Double型の値を取得する
      */
-    private static double getDouble(String key, float defValue) {
-        return getSharedPreferences().getFloat(key, defValue);
+    private static double getDouble(String key, double defValue) {
+        long defaultValue = Double.doubleToRawLongBits(defValue);
+        return Double.longBitsToDouble(getSharedPreferences().getLong(key, defaultValue));
     }
 
     private static double getDouble(String key) {
-        return getDouble(key, 0f);
+        return getDouble(key, 0.0);
     }
 
     /**
-     * Float型の値かNullを取得する
+     * Double型の値かNullを取得する
      */
     private static Double getDoubleOrNull(String key) {
-        double minValue = getDouble(key, Float.MIN_VALUE);
-        double maxValue = getDouble(key, Float.MAX_VALUE);
-        if (minValue == Float.MIN_VALUE && maxValue == Float.MAX_VALUE) return null;
+        double minValue = getDouble(key, Double.MIN_VALUE);
+        double maxValue = getDouble(key, Double.MAX_VALUE);
+        if (minValue == Double.MIN_VALUE && maxValue == Double.MAX_VALUE) return null;
         return minValue;
     }
 
@@ -162,7 +164,7 @@ public class SharedPreferencesUtility {
      * Set<String>型の値かNullを取得する
      */
     private static Set<String> getStringSetOrNull(String key) {
-        return getStringSet(key, null);
+        return getStringSet(key, new HashSet<String>());
     }
 
     /**
