@@ -1,6 +1,7 @@
 package com.naoele.androidutilities.Utils;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 /**
  * ApplicationContextをどこからでも参照できるシングルトンクラス
@@ -44,6 +45,14 @@ public class ContextUtility {
     public static String getString(int resId) {
         isNull();
         return instance.getApplicationContext().getString(resId);
+    }
+
+    /**
+     * Resourcesを取得する
+     */
+    public static Resources getResources() {
+        isNull();
+        return instance.getContext().getResources();
     }
 
     private static void isNull() {
