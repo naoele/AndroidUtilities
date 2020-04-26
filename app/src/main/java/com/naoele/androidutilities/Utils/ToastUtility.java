@@ -96,22 +96,22 @@ public class ToastUtility {
      * Toastを上部に表示する
      */
     public static void showToastOnTop(final String message) {
-        showChangePositionToast(message, Gravity.TOP, 0, calcDp(8));
+        showChangePositionToast(message, Gravity.TOP, 0, CalcUtility.convertDp2Px(8));
     }
 
     public static void showToastOnTop(final Context context, final String message) {
-        showChangePositionToast(context, message, Gravity.TOP, 0, calcDp(8));
+        showChangePositionToast(context, message, Gravity.TOP, 0, CalcUtility.convertDp2Px(8));
     }
 
     /**
      * Toastを上部に長く表示する
      */
     public static void showLongToastOnTop(final String message) {
-        showLongChangePositionToast(message, Gravity.TOP, 0, calcDp(8));
+        showLongChangePositionToast(message, Gravity.TOP, 0, CalcUtility.convertDp2Px(8));
     }
 
     public static void showLongToastOnTop(final Context context, final String message) {
-        showLongChangePositionToast(context, message, Gravity.TOP, 0, calcDp(8));
+        showLongChangePositionToast(context, message, Gravity.TOP, 0, CalcUtility.convertDp2Px(8));
     }
 
     /**
@@ -140,13 +140,5 @@ public class ToastUtility {
                 }
             });
         }
-    }
-
-    /**
-     * dpをpixelに計算する
-     */
-    private static int calcDp(final int dp) {
-        float scale = ContextUtility.getResources().getDisplayMetrics().density;
-        return (int) (dp * scale + 0.5f);
     }
 }
