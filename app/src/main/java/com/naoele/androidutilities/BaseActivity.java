@@ -13,30 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public class BaseActivity extends AppCompatActivity {
 
-    // キーボードマネジャー
-    private InputMethodManager _im_manager;
-
-    // 背景レイアウト
-//    private LinearLayout mainLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        //画面全体のレイアウト
-//        mainLayout = (LinearLayout)findViewById(R.id.mainLayout);
-        //キーボード表示を制御するためのオブジェクト
-        _im_manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        //キーボードを隠す
-//        _im_manager.hideSoftInputFromWindow(mainLayout.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-//        //背景にフォーカスを移す
-//        mainLayout.requestFocus();
-
-        return false;
     }
 
     @Override
@@ -53,6 +33,18 @@ public class BaseActivity extends AppCompatActivity {
 //        }
 
         return super.dispatchKeyEvent(e);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+
+        //背景タッチでキーボードを隠す
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
+
+        return super.dispatchTouchEvent(ev);
     }
 
 }
